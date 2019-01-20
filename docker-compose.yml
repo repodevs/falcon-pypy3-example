@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+    web:
+        build: ./
+        image: falcon-web
+        container_name: falcon-web
+        ports:
+            - '9099:9099'
+        volumes:
+            - './:/usr/src/app'
+        command: gunicorn --reload book.app --bind 0.0.0.0:9099
+        environment:
+            - DYNACONF_MONGODB_HOST=mongodb://mongodb
+            - DYNACONF_MONGODB_PORT=27017
+            - DYNACONF_CELERY_BROKER=redis://redis:6379/0
+            - DYNACONF_CELERY_BACKEND=redis://redis:6379/0
+        depends_on:
+            - mongodb
+            - redis
+    
+    celery:
+        image: falcon-web
+        container_name: falcon-celery
+        volumes:
+            - './:/usr/src/app'
+        command: celery -A book.tasks worker --loglevel=info
+        environment:
+            - DYNACONF_CELERY_BROKER=redis://redis:6379/0
+            - DYNACONF_CELERY_BACKEND=redis://redis:6379/0
+        depends_on:
+            - web
+            - redis
+
+    mongodb:
+        image: mongo:latest
+        container_name: falcon-mongodb
+        ports:
+            - "27017:27017"
+        command: "--smallfiles --logpath=/dev/null"
+
+    redis:
+        image: redis:3.0.0
+        container_name: falcon-redis
+        ports:
+            - "6379:6379"
+

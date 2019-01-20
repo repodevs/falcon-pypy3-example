@@ -1,0 +1,7 @@
+falcon==1.4.1
+gunicorn==19.9.0
+mongoengine==0.16.3
+dynaconf==1.2.0
+redis==3.0.1
+celery==4.2.1
+
