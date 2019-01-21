@@ -40,6 +40,16 @@ services:
             - "27017:27017"
         command: "--smallfiles --logpath=/dev/null"
 
+    monitor:
+        image: falcon-web
+        container_name: falcon-monitor
+        ports:
+            - '5559:5559'
+        command: flower -A book.tasks --port=5559 --broker=redis://redis:6379/0
+        depends_on:
+            - web
+            - redis
+
     redis:
         image: redis:3.0.0
         container_name: falcon-redis
