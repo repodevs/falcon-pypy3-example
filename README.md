@@ -90,6 +90,10 @@ $ python -m book.test
 $ watch -n1 http GET 127.0.0.1:9099/task/status/{TASK_ID}
 ```
 
+### Flower dashboard
+
+Open Flower dashboard at [http://localhost:5559](http://localhost:5559)
+
 ---
 ### Reference
 [https://www.alibabacloud.com/blog/building-very-fast-app-backends-with-falcon-web-framework-on-pypy_594282](https://www.alibabacloud.com/blog/building-very-fast-app-backends-with-falcon-web-framework-on-pypy_594282)
