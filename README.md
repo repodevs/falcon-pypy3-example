@@ -6,7 +6,7 @@ $ docker-compose up -d --build
 ```
 
 ### Available REST API
-**Very Recommened to test using `httpie` :)**
+**Very Recommended to test using `httpie` :)**
 
 #### Ping Services
 ```
@@ -83,6 +83,11 @@ Another useful stuff
 **NOTE: run the test as a module**
 ```
 $ python -m book.test
+```
+
+#### Run Integration Tests
+```
+$ ./run_integration_test.sh
 ```
 
 #### Watch Task Status 
